@@ -6,4 +6,3 @@ from . import serializers
 class GratitudeNoteViewset(viewsets.ModelViewSet):
     queryset = GratitudeNote.objects.all()
     serializer_class = serializers.GratitudeNoteSerializer
-
