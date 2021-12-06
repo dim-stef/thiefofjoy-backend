@@ -11,3 +11,10 @@ class GratitudeNote(models.Model):
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class StrengtheNote(models.Model):
+    journal = models.ForeignKey(Journal, on_delete=models.CASCADE, related_name="strength_notes")
+    body = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

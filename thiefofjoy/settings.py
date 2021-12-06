@@ -46,8 +46,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'rest_auth.registration',
+    'corsheaders',
+    'accounts',
     'journal'
 ]
 
@@ -67,6 +75,14 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
 ]
 
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 ROOT_URLCONF = 'thiefofjoy.urls'
 
 TEMPLATES = [
@@ -79,11 +95,21 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.contrib.messages.context_processors.messages'
             ],
         },
     },
 ]
+AUTH_USER_MODEL = 'accounts.User'
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_UNIQUE_EMAIL = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 WSGI_APPLICATION = 'thiefofjoy.wsgi.application'
 
@@ -128,6 +154,7 @@ REST_FRAMEWORK = {
     ]
 }
 
+SITE_ID = 1
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
